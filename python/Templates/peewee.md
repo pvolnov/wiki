@@ -33,8 +33,8 @@ class PredictingUnit(Model):
 Update postgress
 ---
 ```python
-IkeaItems.insert_many(on_rep[k:k + 100]).on_conflict(conflict_target=[IkeaItems.code],
+.insert_many(on_rep[k:k + 100]).on_conflict(conflict_target=[IkeaItems.code],
                                                               update={IkeaItems.search: EXCLUDED.search,
                                                                       IkeaItems.name: EXCLUDED.name,})
      
-```
+``` 

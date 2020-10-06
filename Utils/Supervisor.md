@@ -22,12 +22,12 @@ Setting
 Create file on `/etc/supervisor/conf.d`
 
 ```
-[program:elfin]
-command=python3 app.py
-directory=/home/elfin
+[program:loader]
+command=python3 items_parsing.py
+directory=/home/neafiol 
 environment=SERVER=SW
 autostart=true
 autorestart=true
-stderr_logfile=/var/log/elfin.err.log
-stdout_logfile=/var/log/elfin.out.log
+stderr_logfile=/var/log/loader.err.log
+stdout_logfile=/var/log/loader.out.log
 ```

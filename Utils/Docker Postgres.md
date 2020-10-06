@@ -7,6 +7,7 @@ docker run --rm   --name pg-docker -e POSTGRES_PASSWORD=nef441 -d -p 5432:5432 -
 
 docker exec -it pg-docker psql
 
+pg_dump -h localhost -U postgres -W  yamarket >  export.dmp
 
 ```
 
