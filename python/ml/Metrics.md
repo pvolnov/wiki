@@ -7,7 +7,7 @@ Classifiter metrics
 
 $$\large F_\beta = (1 + \beta^2) \cdot \frac{\mathrm{precision} \cdot \mathrm{recall}}{(\beta^2 \cdot \mathrm{precision}) + \mathrm{recall}}.$$
 
-![alt text](f1.png)
+![alt text](src/f1.png)
 
 
 -----------------------
