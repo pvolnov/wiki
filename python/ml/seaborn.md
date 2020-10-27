@@ -3,6 +3,8 @@ Seaborn
 
 ```python
 import seaborn as sns
+import matplotlib
+import matplotlib.pyplot as plt
 sns.set(color_codes=True)
 %matplotlib inline 
 %config InlineBackend.figure_format = 'svg'
