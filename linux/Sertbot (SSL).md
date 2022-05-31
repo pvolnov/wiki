@@ -6,7 +6,7 @@ sudo add-apt-repository ppa:certbot/certbot
 sudo apt update
 sudo apt install certbot
 
-sudo certbot certonly --standalone -d sw.neafiol
+sudo certbot certonly --standalone -d api.cryptohere.app
 ```
 
 Далее
@@ -16,3 +16,5 @@ context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     context.load_cert_chain("/etc/letsencrypt/live/sw.neafiol.site/cert.pem",
                             keyfile="/etc/letsencrypt/live/sw.neafiol.site/privkey.pem")
 ```
+
+sudo certbot certonly --standalone -d api.oops.finance

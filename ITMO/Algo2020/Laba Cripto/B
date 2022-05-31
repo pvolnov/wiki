@@ -1,0 +1,60 @@
+#include <iostream>
+#include <cstdio>
+#include <cstdint>
+
+using namespace std;
+
+#define int __int128
+
+int gcd(int a, int b) {
+    if (!b) return a;
+    return gcd(b, a % b);
+}
+/*int mul(int a, int b, int m) {
+    int q = (int)((long double)a * (long double)b / (long double)m);
+    int r = (long double)a * b - q * m;
+    return (r + 5 * m) % m;
+}*/
+int st(int a, int b, int m) {
+    if (!b) return 1;
+    int aa = st(a, b / 2, m);
+    aa = aa * aa;
+    aa %= m;
+    if (b % 2) aa = aa * a;
+    aa %= m;
+    return aa;
+}
+bool miller(int n) {
+    if (n == 2 || n == 3) return 1;
+    if (n == 1 || n % 2 == 0) return 0;
+
+    int cb = n - 1, ca = 0;
+    while (cb % 2 == 0) {
+        ++ca;
+        cb /= 2;
+    }
+
+    for (int i = 0; i < 10; ++i) {
+        int a = rand() % n;
+        if (!a) ++a;
+        
+        bool ok = 0;
+        if (st(a, cb, n) == 1) ok = 1;
+        for (int i = 0; i < ca; ++i) {
+            if (st(a, (1 << i) * cb, n) == n - 1) ok = 1;
+        }
+        if (!ok) return 0;
+    }
+    return 1;
+}
+
+const string IO[2]{ "NO\n", "YES\n" };
+
+signed main() {
+    long long t; cin >> t;
+    srand(10101010101);
+    while (t--) {
+        long long x; cin >> x;
+        cout << IO[miller(x)];
+    }
+}

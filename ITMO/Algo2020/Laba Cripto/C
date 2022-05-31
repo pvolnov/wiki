@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+#define int long long
+using namespace std;
+int INF = 1e9;
+struct diafant {
+    int gcd(int a, int b, int &x, int &y) {
+        if (b == 0) {
+            x = 1;
+            y = 0;
+            return a;
+        }
+        int x1, y1;
+        int g = gcd(b, a % b, x1, y1);
+        x = y1;
+        y = x1 - a / b * y1;
+        return g;
+    }
+
+    pair <int, int> get(int a, int b, int c) {
+        int x, y;
+        int g = gcd(a, b, x, y);
+        if (c % g != 0) {
+            return {INF, INF};
+        }
+        a /= g; b /= g; c /= g;
+        x *= c;
+        y *= c;
+        int t = 0;
+        if (x > 0) {
+            t = x / b;
+        } else {
+            t = -(abs(x) + b - 1) / b;
+        }
+        x -= t * b;
+        y += t * a;
+        // return {x - t * b, y + a * t};
+        return {x, b * a * g};
+    }
+};
+
+signed main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie();
+    cout.tie();
+    int t = 1;
+    diafant diaf;
+    while (t--) {
+        int a, b, n, m;
+        cin >> a >> b >> n >> m;
+        a %= n;
+        b %= m;
+        pair <int, int> p = diaf.get(n, m, b - a);
+        cout << p.first * n  + a << endl;
+    }
+}

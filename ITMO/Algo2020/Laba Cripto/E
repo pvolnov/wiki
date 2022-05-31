@@ -1,0 +1,67 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <complex>
+
+using namespace std;
+
+#define int long long
+#define cmp complex<double>
+
+void fft(vector<cmp>& a) {
+    int n = a.size();
+    if (n == 1) return;
+    vector<cmp> lf(n / 2), rf(n / 2);
+    for (int i = 0; i < n / 2; ++i) {
+        lf[i] = a[2 * i];
+        rf[i] = a[2 * i + 1];
+    }
+    fft(lf); fft(rf);
+    double e = 2 * 3.141592653589793238462643 / n;
+    cmp w(1, 0), wn(cos(e), sin(e));
+    for (int i = 0; i < n / 2; ++i) {
+        a[i] = lf[i] + w * rf[i];
+        a[i + n / 2] = lf[i] - w * rf[i];
+        w *= wn;
+    }
+}
+void inv(vector<cmp>& a) {
+    int n = a.size();
+    if (n == 1) return;
+    vector<cmp> lf(n / 2), rf(n / 2);
+    for (int i = 0; i < n / 2; ++i) {
+        lf[i] = a[2 * i];
+        rf[i] = a[2 * i + 1];
+    }
+    inv(lf); inv(rf);
+    double e = -2 * 3.141592653589793238462643 / n;
+    cmp w(1, 0), wn(cos(e), sin(e));
+    for (int i = 0; i < n / 2; ++i) {
+        a[i] = lf[i] + w * rf[i]; a[i] /= 2;
+        a[i + n / 2] = lf[i] - w * rf[i]; a[i + n / 2] /= 2;
+        w *= wn;
+    }
+}
+
+signed main() {
+    int n; cin >> n;
+    ++n;
+    int sz = 1;
+    while (sz < n) sz *= 2;
+    sz *= 2;
+    vector<cmp> a(sz), b(sz);
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+    }
+    for (int i = 0; i < n; ++i) {
+        cin >> b[i];
+    }
+    fft(a); fft(b);
+    vector<cmp> c(sz);
+    for (int i = 0; i < sz; ++i) c[i] = a[i] * b[i];
+    inv(c);
+    for (int i = 0; i <= 2 * n - 2; ++i) {
+        cout << (int)(c[i].real() + 0.5) << ' ';
+    }
+    cout << '\n';
+}

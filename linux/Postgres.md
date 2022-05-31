@@ -1,5 +1,6 @@
 sudo apt install postgresql-server-dev-all
 sudo apt-get install build-essential libssl-dev libffi-dev python-dev libpq-dev
+sudo apt install postgresql
 
 psycopg2
 

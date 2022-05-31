@@ -11,3 +11,24 @@ df.to_csv("mypredictions.csv",index=False)
 df.head()
 
 ```
+
+Merge to one excel doc
+--------------------------------
+```python
+from pyexcel import merge_all_to_a_book
+
+merge_all_to_a_book(['Export Products Sheet.csv', 'Export Groups Sheet.csv'], "output.xlsx")
+```
+
+
+Clear style
+--------------------------------
+```python
+import openpyxl
+wb = openpyxl.load_workbook("output.xlsx")
+for sheet in wb:
+    sheet_name = sheet.title
+    sheet.title = sheet_name.replace(".csv", "")
+    print(sheet_name)
+wb.save("output.xlsx")
+```

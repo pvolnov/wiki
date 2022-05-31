@@ -2,7 +2,7 @@
 curl -s https://aerokube.com/cm/bash | bash
 sudo ./cm selenoid start --vnc -g "--limit 8"
 
-./cm selenoid-ui start
+sudo ./cm selenoid-ui start
 ```
 
 Смотрим: `http://localhost:4444/status`
